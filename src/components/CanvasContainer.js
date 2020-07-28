@@ -47,21 +47,7 @@ class CanvasContainer extends React.Component {
     componentWillUnmount = () => {
         window.removeEventListener('keydown', this.deleteHandler);
     };
-
-
-    handleZoom = () => {
-        const returnCanvas = () => this.canvas;
-        this.canvas.on('mouse:wheel', function (opt) {
-            let delta = opt.e.deltaY;
-            let zoom = returnCanvas().getZoom();
-            zoom *= 0.999 ** delta;
-            if (zoom > 20) zoom = 20;
-            if (zoom < 0.5) zoom = 0.5;
-            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
-            opt.e.preventDefault();
-            opt.e.stopPropagation();
-        });
-    };
+    
 
     handlePan = () => {
         this.canvas.on('mouse:move', (event) => {
