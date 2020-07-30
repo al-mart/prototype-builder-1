@@ -1,0 +1,58 @@
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: bisque;
+  padding: 10px;
+  margin: 5px 10px;
+  border-radius: 25px;
+  height: 125px;
+  width: calc(100% - 20px);
+  bottom: 0;
+  position: absolute;
+  .teamMemberesAndResources {
+    display: flex;
+    flex-flow: column;
+    width: 400px;
+    padding: 0 10px;
+    .linksContainer{
+      align-items: center;
+      display: flex;
+      flex-flow: column;
+    }
+    .memberName{
+      color:white;
+      display: inline-flex;
+      width: 200px;
+      justify-content: center;
+      font-weight: bold;
+    }
+    a{
+      padding: 0 5px;
+      margin: 0 5px;
+      color: deepskyblue;
+      text-decoration: none;
+    }
+    a:hover{
+      color: black;
+    }
+  }
+
+  .icons-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    .footerIconsContainer {
+      display: flex;
+      .footerIconsContainerItem {
+        padding: 10px;
+        margin: 10px;
+      }
+      .footerIconsContainerItem:hover{
+        background-color: #61dafb;
+        border-radius: 30px;
+        cursor: pointer;
+      }
+    }
+  }
+}

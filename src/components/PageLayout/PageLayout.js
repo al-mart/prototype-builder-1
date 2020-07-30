@@ -14,13 +14,20 @@ import {
     updateCurrentObject,
     deleteObject
 } from '../../actions/canvasActions';
+import Footer from "../Footer/Footer";
 
 
 class PageLayout extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.canvasRef = React.createRef();
+    }
     state = {
         // currentElement: {},
         panningMode: false,
-        isPanning: false
+        isPanning: false,
+        isDesktopView: false,
     };
 
     deleteHandler = (event) => {
@@ -33,7 +40,7 @@ class PageLayout extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id']))
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id']));
     };
     removeSelection = () => {
         return this.props.onCurrentObjectUpdate({})
@@ -138,6 +145,11 @@ class PageLayout extends React.Component {
         this.props.onElementPropChange(this.canvas, obj);
     };
 
+    deviceViewHandler = (isDesktopView) => {
+        this.canvasRef = null;
+        this.setState({isDesktopView: isDesktopView});
+    }
+
 
     handleBringToTop = () => {
         const activeObj = this.canvas.getActiveObject();
@@ -156,6 +168,14 @@ class PageLayout extends React.Component {
     };
 
     render() {
+        const canvasSize = {
+            height: 600,
+            width: 800
+        };
+        if (!this.state.isDesktopView){
+            canvasSize.height = 500;
+            canvasSize.width = 300;
+        }
         return (
             <div>
                 <HeaderContainer
@@ -168,12 +188,12 @@ class PageLayout extends React.Component {
                     center={this.handleCenter}/>
                 <div className="mainContainer">
                     <SidebarContainer handleAdd={this.handleAdd}/>
-                    <canvas
-                        className='canvas'
-                        height={600}
-                        width={800}
-                        id='canvas'>
-                    </canvas>
+                        <canvas
+                            className='canvas'
+                            height={canvasSize.height}
+                            width={canvasSize.width}
+                            id='canvas'>
+                        </canvas>
                     <ItemSettingsContainer
                         currentElement={this.props.currentElement}
                         elementChange={this.handleElementPropChange}
@@ -181,6 +201,7 @@ class PageLayout extends React.Component {
                         center={this.handleCenter}
                     />
                 </div>
+                <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
             </div>
         );
     }

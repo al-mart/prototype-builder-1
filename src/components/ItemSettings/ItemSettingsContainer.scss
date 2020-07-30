@@ -1,0 +1,26 @@
+.settingsContainer{
+  width: 25%;
+  position: absolute;
+  right: 0;
+  padding: 20px;
+}
+
+.settingsButton{
+  margin: 5px;
+  padding: 5px;
+  background-color: bisque;
+  outline: 0;
+  width: auto;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+}
+
+.settingsButton:hover{
+  border: 2px solid azure;
+}
+
+
+.settingsButton:focus{
+  outline: azure;
+}

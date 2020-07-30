@@ -6,12 +6,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class UploadImageFromPC extends React.Component {
     state = {
+        labelName: "Choose a file...",
         chooseFiles: [],
     };
     handleChange = (e) => {
+        const fileName = e.nativeEvent.target.files[0].name;
         e.persist();
         const files = [...e.target.files];
         this.setState({
+            labelName: fileName,
             chooseFiles: files
         });
     };
@@ -47,9 +50,9 @@ class UploadImageFromPC extends React.Component {
             <div>
 
                 <input onChange={this.handleChange} type="file" name="file" id="file" className="inputfile"/>
-                <div>
+                <div className="labelContainer">
                     <FontAwesomeIcon icon={faUpload} />
-                    <label htmlFor="file">Choose a file...</label>
+                    <label htmlFor="file">{this.state.labelName}</label>
                 </div>
 
                 <button className='inputButton' onClick={this.handleClick}>ADD</button>

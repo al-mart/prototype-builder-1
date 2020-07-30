@@ -4,6 +4,7 @@ import LineSettings from './SettingsComponents/LineSettings/LineSettings';
 import TextSettings from './SettingsComponents/TextSettings/TextSettings';
 import ShapeSettings from './SettingsComponents/ShapeSettings/ShapeSettings';
 import ButtonSettings from "./SettingsComponents/ButtonSettings/ButtonSettings";
+import "./ItemSettingsContainer.scss";
 import _ from 'lodash';
 
 class ItemSettingsContainer extends Component {
@@ -30,13 +31,13 @@ class ItemSettingsContainer extends Component {
         }
 
         return (
-            <div className="settingsWrapper">
+            <div className="settingsContainer">
                 {settings ? settings : <h5>Please select element</h5>}
                 {settings
                     ? <div className="objAlignBtns">
-                        <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>
-                        <button className="primary" onClick={() => this.props.center('H')}>Center horizontally</button>
-                        <button className="primary" onClick={() => this.props.center('V')}>Center vertically</button>
+                        <button className="settingsButton" onClick={this.props.bringToTop}>Bring forward</button>
+                        <button className="settingsButton" onClick={() => this.props.center('H')}>Center horizontally</button>
+                        <button className="settingsButton" onClick={() => this.props.center('V')}>Center vertically</button>
                     </div> : null}
             </div>
         );
