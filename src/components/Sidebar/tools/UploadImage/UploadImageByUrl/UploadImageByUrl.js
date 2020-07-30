@@ -1,7 +1,9 @@
 import React, {useRef} from 'react';
 import {fabric} from 'fabric';
 
-const AddImageURL = ({handleAdd}) => {
+import "./UploadImageByUrl.scss";
+
+const UploadImageByUrl = ({handleAdd}) => {
     const ref = useRef();
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,16 +17,16 @@ const AddImageURL = ({handleAdd}) => {
         }
     };
     return (
-        <form onSubmit={handleSubmit} >
-            <input
+        <form className='formWrapper' onSubmit={handleSubmit} >
+            <input className='formWrapper__input'
                 ref={ref}
-                placeholder='simply add the URL'
+                placeholder='URL...'
                 type="text"/>
-                <button className="primary" type='submit' >
-                    Add image
+                <button className='formWrapper__button' type='submit' >
+                    ADD
                 </button>
         </form>
     );
 };
 
-export default AddImageURL;
+export default UploadImageByUrl;

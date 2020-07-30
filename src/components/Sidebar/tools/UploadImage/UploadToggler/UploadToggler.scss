@@ -1,0 +1,23 @@
+.buttons-wrapper{
+  width: 150px;
+  border:  2px solid blanchedalmond;
+  border-radius: 10px;
+  margin: 5px auto;
+  .buttons-wrapper__item{
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    margin:  0;
+    background: none;
+    border: none;
+    border-radius: 10px;
+  }
+  .buttons-wrapper__item:focus{
+    outline: none;
+  }
+
+  .buttons-wrapper__item-selected{
+    background-color: #61dafb;
+    outline: 0;
+  }
+}

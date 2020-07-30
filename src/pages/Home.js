@@ -1,9 +1,9 @@
 import React from 'react';
-import CanvasContainer from "../components/CanvasContainer";
+import PageLayout from "../components/PageLayout/PageLayout";
 
 const Home = () => {
     return (
-        <CanvasContainer />
+        <PageLayout />
     );
 };
 

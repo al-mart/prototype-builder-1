@@ -1,21 +1,22 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 import 'fabric-history';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import SidebarContainer from "./sidebar/SidebarContainer";
-import SettingsContainer from "./settings/SettingsContainer";
-import HeaderSettings from "./settings/HeaderSettings";
-
-import './CanvasContainer.scss';
-
-
-import { updateElement, updateCurrentObject, deleteObject } from '../actions/canvasActions';
+import SidebarContainer from "../Sidebar/SidebarContainer";
+import ItemSettingsContainer from "../ItemSettings/ItemSettingsContainer";
+import HeaderContainer from "../Header/HeaderContainer";
+import './PageLayout.scss';
 
 
-class CanvasContainer extends React.Component {
+import {
+    updateElement,
+    updateCurrentObject,
+    deleteObject
+} from '../../actions/canvasActions';
 
 
+class PageLayout extends React.Component {
     state = {
         // currentElement: {},
         panningMode: false,
@@ -45,21 +46,17 @@ class CanvasContainer extends React.Component {
         this.canvas.on('selection:created', this.updateSelection);
         this.canvas.on('selection:updated', this.updateSelection);
         this.canvas.on('selection:cleared', this.removeSelection);
-
         this.handlePan();
         this.handleZoom();
         window.addEventListener("keydown", this.deleteHandler);
     };
 
-
     componentWillUnmount = () => {
         this.canvas.off('selection:created', this.updateSelection);
         this.canvas.off('selection:updated', this.updateSelection);
         this.canvas.off('selection:cleared', this.removeSelection);
-
         window.removeEventListener('keydown', this.deleteHandler);
     };
-
 
     handleZoom = () => {
         const returnCanvas = () => this.canvas;
@@ -69,7 +66,7 @@ class CanvasContainer extends React.Component {
             zoom *= 0.999 ** delta;
             if (zoom > 20) zoom = 20;
             if (zoom < 0.5) zoom = 0.5;
-            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+            returnCanvas().zoomToPoint({x: opt.e.offsetX, y: opt.e.offsetY}, zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
@@ -82,7 +79,7 @@ class CanvasContainer extends React.Component {
             }
             if (this.state.isPanning && this.state.panningMode) {
                 this.canvas.setCursor('grab');
-                const { e: { movementX, movementY } } = event;
+                const {e: {movementX, movementY}} = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
             }
@@ -115,10 +112,12 @@ class CanvasContainer extends React.Component {
     };
     handleRemove = () => {
         this.props.onDeleteObject(this.canvas, this.props.currentElement);
-        // const activeObj = this.canvas.getObjects().find(el => el.id === obj.id);
-        // console.log(activeObj)
-        // this.canvas.remove(activeObj);
-        // this.setState({ currentElement: {} });
+        /*
+        const activeObj = this.canvas.getObjects().find(el => el.id === obj.id);
+        console.log(activeObj)
+        this.canvas.remove(activeObj);
+        this.setState({ currentElement: {} });
+         */
     };
 
     handlePanningMode = () => {
@@ -129,12 +128,14 @@ class CanvasContainer extends React.Component {
 
 
     handleElementPropChange = (obj) => {
-        // const newCurrentElement = this.canvas.getActiveObject();
-        // newCurrentElement.set({ ...obj });
-        // this.canvas.renderAll();
-        // console.log(newCurrentElement === this.state.currentElement);
-        // this.setState({ currentElement: newCurrentElement.toObject() });
-        this.props.onElementPropChange(this.canvas, obj)
+       /*
+        const newCurrentElement = this.canvas.getActiveObject();
+        newCurrentElement.set({ ...obj });
+        this.canvas.renderAll();
+        console.log(newCurrentElement === this.state.currentElement);
+        this.setState({ currentElement: newCurrentElement.toObject() });
+        */
+        this.props.onElementPropChange(this.canvas, obj);
     };
 
 
@@ -156,32 +157,30 @@ class CanvasContainer extends React.Component {
 
     render() {
         return (
-            <div className="workspaceWrapper">
-                <SidebarContainer handleAdd={this.handleAdd} />
-
+            <div>
+                <HeaderContainer
+                    panningMode={this.state.panningMode}
+                    handlePanningMode={this.handlePanningMode}
+                    handleUndoAndRedo={this.handleUndoAndRedo}
+                    currentElement={this.props.currentElement}
+                    handleRemove={this.handleRemove}
+                    bringToTop={this.handleBringToTop}
+                    center={this.handleCenter}/>
                 <div className="mainContainer">
-                    <HeaderSettings
-                        panningMode={this.state.panningMode}
-                        handlePanningMode={this.handlePanningMode}
-                        handleUndoAndRedo={this.handleUndoAndRedo}
-                        currentElement={this.props.currentElement}
-                        handleRemove={this.handleRemove}
-                        bringToTop={this.handleBringToTop}
-                        center={this.handleCenter} />
+                    <SidebarContainer handleAdd={this.handleAdd}/>
                     <canvas
                         className='canvas'
-                        height={500}
-                        width={600}
+                        height={600}
+                        width={800}
                         id='canvas'>
                     </canvas>
+                    <ItemSettingsContainer
+                        currentElement={this.props.currentElement}
+                        elementChange={this.handleElementPropChange}
+                        bringToTop={this.handleBringToTop}
+                        center={this.handleCenter}
+                    />
                 </div>
-
-                <SettingsContainer
-                    currentElement={this.props.currentElement}
-                    elementChange={this.handleElementPropChange}
-                    bringToTop={this.handleBringToTop}
-                    center={this.handleCenter}
-                />
             </div>
         );
     }
@@ -201,6 +200,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CanvasContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PageLayout);
 
 

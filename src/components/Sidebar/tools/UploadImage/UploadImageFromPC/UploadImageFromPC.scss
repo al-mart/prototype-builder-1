@@ -1,0 +1,39 @@
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+}
+
+.inputfile + div {
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+  background-color: bisque;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.inputfile:focus + div {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputButton {
+  font-size: 1em;
+  font-weight: 700;
+  margin: 5px;
+  padding: 5px;
+  background-color: bisque;
+  width: 60px;
+  border: none;
+  border-radius: 10px;
+}
+

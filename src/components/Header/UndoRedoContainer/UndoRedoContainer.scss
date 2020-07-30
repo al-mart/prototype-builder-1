@@ -1,0 +1,20 @@
+
+.undoredoButton {
+  margin: 5px;
+  padding: 5px;
+  background-color: bisque;
+  outline: 0;
+  width: 50px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+}
+
+.undoredoButton:hover{
+  border: 2px solid azure;
+}
+
+
+.undoredoButton:focus{
+  outline: azure;
+}

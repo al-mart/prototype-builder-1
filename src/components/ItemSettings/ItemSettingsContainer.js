@@ -1,14 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-import LineSettings from './settings/LineSettings/LineSettings';
-import TextSettings from './settings/TextSettings/TextSettings';
-import ShapeSettings from './settings/ShapeSettings/ShapeSettings';
-import ButtonSettings from "./settings/ButtonSettings/ButtonSettings";
+import LineSettings from './SettingsComponents/LineSettings/LineSettings';
+import TextSettings from './SettingsComponents/TextSettings/TextSettings';
+import ShapeSettings from './SettingsComponents/ShapeSettings/ShapeSettings';
+import ButtonSettings from "./SettingsComponents/ButtonSettings/ButtonSettings";
 import _ from 'lodash';
 
-import './Settings.scss';
-
-class SettingsContainer extends React.Component {
+class ItemSettingsContainer extends Component {
     render() {
         const { currentElement, elementChange } = this.props;
         let groupTypes;
@@ -45,4 +43,4 @@ class SettingsContainer extends React.Component {
     }
 }
 
-export default SettingsContainer;
+export default ItemSettingsContainer;

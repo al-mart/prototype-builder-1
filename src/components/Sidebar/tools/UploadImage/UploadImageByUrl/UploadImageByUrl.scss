@@ -1,0 +1,24 @@
+.formWrapper{
+  padding: 5px;
+  margin: 5px;
+
+  .formWrapper__input{
+    border-radius: 5px;
+    border: 5px solid bisque;
+    width: 125px;
+  }
+  .formWrapper__input:focus{
+    outline: bisque;
+  }
+
+  .formWrapper__button{
+    font-size: 1em;
+    font-weight: 700;
+    margin: 5px;
+    padding: 5px;
+    background-color: bisque;
+    width: 60px;
+    border: none;
+    border-radius: 10px;
+  }
+}
